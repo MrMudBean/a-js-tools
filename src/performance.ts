@@ -8,7 +8,8 @@
 
 import { isFunction, isNull, isNumber, isUndefined } from 'a-type-of-js';
 
-type Callback = (...args: unknown[]) => void;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Callback = (...args: any[]) => void;
 
 /**
  *
@@ -46,7 +47,7 @@ export type debounce_throttle_options =
  * }
  *
  */
-export function debounce<F extends (...args: unknown[]) => void>(
+export function debounce<F extends Callback>(
   callback: F,
   options: debounce_throttle_options = 200,
 ): DebounceAndThrottleReturnType<F> {
@@ -97,7 +98,7 @@ export function debounce<F extends (...args: unknown[]) => void>(
  * @param options      延迟时间（毫秒），默认 200 (ms) 或设置 this
  * @returns   返回的闭包函数
  */
-export function throttle<F extends (...args: unknown[]) => void>(
+export function throttle<F extends Callback>(
   callback: F,
   options: debounce_throttle_options = 200,
 ): DebounceAndThrottleReturnType<F> {
