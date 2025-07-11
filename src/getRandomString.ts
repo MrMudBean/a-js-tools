@@ -6,8 +6,6 @@
  * @license MIT
  */
 import { isNaN, isNumber, isPlainObject, isUndefined } from 'a-type-of-js';
-import { isBrowser } from './isNode';
-
 /**
  *
  *  随机字符串 生成器
@@ -125,10 +123,9 @@ export function getRandomString(
     interleaveString(templateCharsArr, initOptions.chars3);
 
   // 使用密码学安全的随机数生成器
-  const bytes =
-    isBrowser() && window.crypto
-      ? window.crypto.getRandomValues(new Uint8Array(initOptions.length))
-      : global.crypto.getRandomValues(new Uint8Array(initOptions.length));
+  const bytes = global.crypto.getRandomValues(
+    new Uint8Array(initOptions.length),
+  );
   let result = '';
   /**  获取最后的 chars 数据  */
   const chars = templateCharsArr.join('');

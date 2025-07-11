@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "name": "a-js-tools",
   "private": true,
   "description": "一点点 🤏  js 函数",
@@ -41,7 +41,7 @@
     "@rollup/plugin-typescript": "^12.1.4",
     "@types/expect": "^24.3.2",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.0.12",
+    "@types/node": "^24.0.13",
     "a-node-tools": "^4.2.12",
     "babel-jest": "^30.0.4",
     "codecov": "^3.8.3",
@@ -68,7 +68,7 @@
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.36.0",
-    "vjj": "^1.0.6"
+    "vjj": "^1.0.7"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,md,mdx,json}": [
