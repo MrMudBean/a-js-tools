@@ -123,7 +123,7 @@ export function getRandomString(
     interleaveString(templateCharsArr, initOptions.chars3);
 
   // 使用密码学安全的随机数生成器
-  const bytes = global.crypto.getRandomValues(
+  const bytes = globalThis.crypto.getRandomValues(
     new Uint8Array(initOptions.length),
   );
   let result = '';
