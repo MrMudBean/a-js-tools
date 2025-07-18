@@ -1,5 +1,9 @@
 # 更新日志
 
+## v1.0.8 (2025-7-18)
+
+- 优化了使用 `createConstructor` 的类型声明
+
 ## v1.0.7 (2025-7-11)
 
 - 使用 `getRandomString` 时判断是否是浏览器环境，环境判定有误，导致使用 `window.crypto` 使用有误。仙子啊直接使用 `globalThis.crypto` 而非环境判定。

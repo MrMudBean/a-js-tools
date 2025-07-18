@@ -1,7 +1,7 @@
 import {
   CreateConstructor,
   createConstructor,
-} from 'src/object/createConstructor';
+} from './src/object/createConstructor';
 
 export {
   toLowerCamelCase,

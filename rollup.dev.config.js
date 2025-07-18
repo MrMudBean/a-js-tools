@@ -16,6 +16,9 @@ export default {
     dir: '.eg/',
   },
   // 配置需要排除的包
-  external: external(),
+  external: external({
+    ignore: ['node:'],
+    include: ['eg/index.ts'],
+  }),
   plugins: [resolve(), commonjs(), json(), typescript({}), cleanup()],
 };
