@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "1.0.9",
+  "version": "1.0.10-test.0",
   "name": "a-js-tools",
   "private": true,
   "description": "一点点 🤏  js 函数",

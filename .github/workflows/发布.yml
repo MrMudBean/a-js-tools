@@ -44,6 +44,25 @@ jobs:
         with:
           node-version: 22.x
           registry-url: https://registry.npmjs.org
+          # cache: 'pnpm' # 该行添加后触发了 github action 的发布错误
+
+      - name: pnpm 安装
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+          run_install: false
+
+      - name: 缓存 pnpm
+        id: pnpm-store
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-store.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: 发布到 npm
         env:
