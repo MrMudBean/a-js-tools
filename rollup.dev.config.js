@@ -18,7 +18,14 @@ export default {
   // 配置需要排除的包
   external: external({
     ignore: ['node:'],
-    include: ['eg/index.ts'],
+    include: [
+      'eg/index.ts',
+      '@qqi/dev',
+      'a-js-tools',
+      'color-pen',
+      '@qqi/log',
+      '@color-pen/static',
+    ],
   }),
   plugins: [resolve(), commonjs(), json(), typescript({}), cleanup()],
 };

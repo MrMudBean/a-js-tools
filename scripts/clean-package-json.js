@@ -31,7 +31,7 @@ packageJson = {
     email: 'earthnut.dev@outlook.com',
     url: 'https://earthnut.dev/about',
   },
-  homepage: 'https://earthnut.dev/a-js-tools',
+  homepage: 'https://earthnut.dev/npm/a-js-tools',
   bugs: {
     url: 'https://github.com/earthnutDev/a-js-tools/issues',
     email: 'earthnut.dev@outlook.com',

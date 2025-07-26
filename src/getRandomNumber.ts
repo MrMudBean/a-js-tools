@@ -11,7 +11,7 @@ import { isNaN, isNumber } from 'a-type-of-js';
  *
  * 获取一个随机的整数类型
  *
- * 您可以传入两个参数并获取它们之间的任意数字
+ * 您可以传入两个参数并获取它们之间的任意数字，返回值<span style="color:#ff0;">*会包含端值*</span>
  *
  * 如果只传递一个参数，则如果提供的值为负数，则得到一个小于（或大于）该数字的整数
  *
@@ -36,10 +36,10 @@ export function getRandomInt(max: number = 1, min: number = 0): number {
   let _min = Math.ceil(Number(min)),
     /**  获取最大值  */
     _max = Math.floor(Number(max));
-  /**  两值交换  */
-  if (_min > _max) [_max, _min] = [_min, _max];
-  //**  两值相等时，直接返回最大值  */
+  //  两值相等时，直接返回最大值
   if (_max === _min) return _max;
+  //  两值交换
+  if (_min > _max) [_max, _min] = [_min, _max];
 
   return Math.round(Math.random() * (_max - _min) + _min);
 }
