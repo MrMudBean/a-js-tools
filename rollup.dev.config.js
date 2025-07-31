@@ -25,6 +25,7 @@ export default {
       'color-pen',
       '@qqi/log',
       '@color-pen/static',
+      'a-node-tools',
     ],
   }),
   plugins: [resolve(), commonjs(), json(), typescript({}), cleanup()],

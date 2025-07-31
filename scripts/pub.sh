@@ -3,7 +3,7 @@
 CHECK_VERSION="@qqi/check-version"
 # 安装  
 install_check_version() {
-    if ! npm  list -g --depth=0 | grep -q " ${CHECK_VERSION}"; then 
+    if ! npm  list -g --depth=0 | grep -q "${CHECK_VERSION}"; then 
         echo "当前未全局安装 '${CHECK_VERSION}'，即将进行安装"
         npm install ${CHECK_VERSION} --global
     else 
@@ -12,10 +12,9 @@ install_check_version() {
 }
 
 tag=""
-# install_check_version
-printf $(pnpm dlx "${CHECK_VERSION}" -v)  # 更改全局安装的测试方法
-
-if ! tag=$(pnpm dlx "${CHECK_VERSION}" c=. 2>&1); then
+# npx 在某种程度上还是要比 pnpm 更靠谱呀
+install_check_version
+if ! tag=$(npx "${CHECK_VERSION}" c=. 2>&1); then
     echo "未通过版本校验：$tag"
     exit 0
 fi
@@ -40,7 +39,7 @@ set -e
 
 cd "dist"
 echo "开始发布 npm 包 ${tag} 版本"
-if ! pnpm publish --provenance --access public --tag "${tag}"  --no-git-checks; then
+if ! pnpm publish --provenance --access public --tag "${tag}" --no-git-checks; then
     echo "发布失败" 
     exit 1
 fi
