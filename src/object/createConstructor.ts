@@ -51,7 +51,7 @@ export function createConstructor<T, Args extends unknown[] = unknown[]>(
   constructor.prototype.bind = Function.bind;
   constructor.prototype.call = Function.call;
   constructor.prototype.length = Function.length;
-  constructor.prototype.arguments = Function.arguments;
+  // constructor.prototype.arguments = Function.arguments;
   constructor.prototype.name = Function.name;
   constructor.prototype.toString = Function.toString;
 

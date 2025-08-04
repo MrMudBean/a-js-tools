@@ -1,5 +1,16 @@
 # 更新日志
 
+## v1.0.12 (2025-8-4)
+
+- 移除 `arguments` 在原型上的使用，因为在大多数时候，会编译成严格模式，导致报错
+
+```bash
+    constructor.prototype.arguments = Function.arguments;
+                                               ^
+
+TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them
+```
+
 ## v1.0.11 (2025-8-4)
 
 - 在使用 `createConstructor` 在 webpack 的环境下，发现非标准的函数对象的原型被写了，导致出现了使用函数原型异常的现象。但是为了统一处理，在 `createConstructor` 强制为原型设置原型方法。
