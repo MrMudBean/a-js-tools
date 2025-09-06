@@ -12,13 +12,13 @@ let packageJson = readFileToJsonSync('./package.json');
 
 packageJson = {
   ...packageJson,
-  main: 'index.cjs',
-  module: 'index.mjs',
+  main: 'index.cjs.js',
+  module: 'index.mjs.js',
   types: 'index.d.ts',
   files: ['index.mjs', 'index.cjs', 'index.d.ts', 'src'],
   exports: {
-    import: './index.mjs',
-    require: './index.cjs',
+    import: './index.mjs.js',
+    require: './index.cjs.js',
     types: './index.d.ts',
   },
   repository: {
