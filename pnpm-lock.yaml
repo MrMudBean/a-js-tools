@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       a-type-of-js:
-        specifier: ^1.0.7
-        version: 1.0.7
+        specifier: 1.0.8-beta.0
+        version: 1.0.8-beta.0
     devDependencies:
       '@babel/core':
         specifier: ^7.28.0
@@ -1180,6 +1180,9 @@ packages:
 
   a-type-of-js@1.0.7:
     resolution: {integrity: sha512-O7pkkRHQii4xt4Po+7N7mVk7xm9APzv6PZdgErSFBuRDSUrHZu5T6TYmFE24/WTR+m4lerbtXBbQfWjRmGyusQ==}
+
+  a-type-of-js@1.0.8-beta.0:
+    resolution: {integrity: sha512-MF0AwUNc8OmqKatn1AjVm2PifkC8M1Tb5B5Kio7jVMg4izn0tAbb5qYn6fxgFc0AITF6Ybz9HbJT8oSz49j3qw==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -3558,6 +3561,8 @@ snapshots:
       color-pen: 2.0.13
 
   a-type-of-js@1.0.7: {}
+
+  a-type-of-js@1.0.8-beta.0: {}
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:

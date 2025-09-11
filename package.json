@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "1.0.13-beta.3",
+  "version": "1.0.13-beta.4",
   "name": "a-js-tools",
   "private": true,
   "description": "一点点 🤏  js 函数",
@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "a-type-of-js": "^1.0.7"
+    "a-type-of-js": "1.0.8-beta.0"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
