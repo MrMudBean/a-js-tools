@@ -12,7 +12,7 @@ export default {
     {
       format: 'es',
       entryFileNames: '[name].mjs.js',
-      preserveModules: true,
+      preserveModules: false,
       sourcemap: false,
       exports: 'named',
       dir: 'dist/',
@@ -20,7 +20,7 @@ export default {
     {
       format: 'cjs',
       entryFileNames: '[name].cjs.js',
-      preserveModules: true,
+      preserveModules: false,
       sourcemap: false,
       exports: 'named',
       dir: 'dist/',

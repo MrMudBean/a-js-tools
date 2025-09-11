@@ -1,5 +1,9 @@
 # 更新日志
 
+## v1.0.13-beta.1 (2025-9-11)
+
+for wechatMiniprogram
+
 ## v1.0.13-beta.0 (2025-9-7)
 
 for wechatMiniprogram
