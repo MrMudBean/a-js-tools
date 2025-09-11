@@ -7,6 +7,7 @@
  */
 import { isNaN, isNumber, isPlainObject, isUndefined } from 'a-type-of-js';
 import { ObjectAssign } from './object/createConstructor';
+import { getRandomInt } from './getRandomNumber';
 /**
  *
  *  随机字符串 生成器
@@ -123,16 +124,23 @@ export function getRandomString(
   if (initOptions.includeSpecial)
     interleaveString(templateCharsArr, initOptions.chars3);
 
-  // 使用密码学安全的随机数生成器
-  const bytes = globalThis.crypto.getRandomValues(
-    new Uint8Array(initOptions.length),
-  );
   let result = '';
-  /**  获取最后的 chars 数据  */
-  const chars = templateCharsArr.join('');
+  const templateCharsArrLength = templateCharsArr.length;
+  if (globalThis && globalThis.crypto && globalThis.crypto.getRandomValues) {
+    // 使用密码学安全的随机数生成器
+    const bytes = globalThis.crypto.getRandomValues(
+      new Uint8Array(initOptions.length),
+    );
+    /**  获取最后的 chars 数据  */
 
-  // 循环遍历
-  bytes.forEach(byte => (result += chars.charAt(byte % chars.length)));
+    // 循环遍历
+    bytes.forEach(
+      byte => (result += templateCharsArr[byte % templateCharsArrLength]),
+    );
+  } else {
+    for (let i = 0; i < initOptions.length; i++)
+      result += templateCharsArr[getRandomInt(templateCharsArrLength - 1)];
+  }
 
   /**
    *
