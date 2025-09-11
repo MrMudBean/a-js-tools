@@ -74,17 +74,21 @@ export function debounce<F extends Callback>(
       timeoutId = undefined;
     }
   };
+  const delay = options && options.delay ? options.delay : 5;
+
   const result = (...args: Parameters<F>) => {
     clear();
     timeoutId = setTimeout(
       () => {
         try {
-          Reflect.apply(callback, options?.this ?? null, args);
+          const _this = options && options.this ? options.this : null;
+          callback.apply(_this, args);
+          // Reflect.apply(callback, options?.this ?? null, args);
         } catch (error) {
           console.log('Debounce callback throw an error', error);
         }
       },
-      Math.max(options?.delay ?? 5, 5),
+      Math.max(delay, 5),
     );
   };
   result.cancel = () => clear();
@@ -120,11 +124,12 @@ export function throttle<F extends Callback>(
   let inThrottle = false;
   /**  延迟控制   */
   let timeoutId: NodeJS.Timeout | null = null;
-
+  const delay = options && options.delay ? options.delay : 5;
   const throttled = (...args: Parameters<F>) => {
     if (inThrottle) return;
     try {
-      Reflect.apply(callback, options?.this ?? null, args);
+      const _this = options && options.this ? options.this : null;
+      callback.apply(_this, args);
     } catch (error) {
       console.error('Throttle 执行回调抛出问题', error);
     }
@@ -136,7 +141,7 @@ export function throttle<F extends Callback>(
         inThrottle = false;
         timeoutId = null;
       },
-      Math.max(options?.delay ?? 5, 5),
+      Math.max(delay, 5),
     );
   };
 

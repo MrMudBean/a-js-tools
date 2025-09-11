@@ -57,3 +57,15 @@ export function createConstructor<T, Args extends unknown[] = unknown[]>(
 
   return constructor as unknown as CreateConstructor<T, Args>;
 }
+
+/** 对象的 assign 用法 */
+export function ObjectAssign(
+  target: Record<string, unknown>,
+  bar: Record<string, unknown>,
+) {
+  const keys = Object.keys(bar);
+
+  keys.forEach(key => (target[key] = bar[key]));
+
+  return target;
+}

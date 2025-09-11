@@ -1,6 +1,7 @@
-import {
-  CreateConstructor,
+export type { CreateConstructor } from './src/object/createConstructor';
+export {
   createConstructor,
+  ObjectAssign,
 } from './src/object/createConstructor';
 
 export {
@@ -26,9 +27,5 @@ export {
   difference,
   symmetricDifference,
 } from './src/array/';
-
-export { createConstructor };
-
-export type { CreateConstructor };
 
 export { sleep } from './src/sleep';

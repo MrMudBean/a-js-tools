@@ -6,6 +6,7 @@
  * @license MIT
  */
 import { isNaN, isNumber, isPlainObject, isUndefined } from 'a-type-of-js';
+import { ObjectAssign } from './object/createConstructor';
 /**
  *
  *  随机字符串 生成器
@@ -105,9 +106,9 @@ export function getRandomString(
   if (initOptions.type === 'uuid') return crypto.randomUUID();
   // 验证输入参数
   if (isNumber(options) && Number.isInteger(options) && options > 0)
-    Object.assign(initOptions, { length: options });
+    ObjectAssign(initOptions, { length: options });
   if (isPlainObject(options)) {
-    Object.assign(initOptions, options);
+    ObjectAssign(initOptions, options);
     initOptions.length = initOptions.length < 1 ? 32 : initOptions.length;
   }
   /**  生成随机字符串  */
