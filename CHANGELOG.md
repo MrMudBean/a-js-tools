@@ -1,18 +1,28 @@
 # 更新日志
 
+## v1.0.13-beta.5 (2025-9-12)
+
+修复在无法使用 `globalThis.crypto.getRandomValues` 环境下获取随机字符串的长度错误
+
 ## v1.0.13-beta.4 (2025-9-12)
+
+for weChatMiniProgram
 
 ## v1.0.13-beta.3 (2025-9-12)
 
+for weChatMiniProgram
+
 ## v1.0.13-beta.2 (2025-9-11)
+
+for weChatMiniProgram
 
 ## v1.0.13-beta.1 (2025-9-11)
 
-for wechatMiniprogram
+for weChatMiniProgram
 
 ## v1.0.13-beta.0 (2025-9-7)
 
-for wechatMiniprogram
+for weChatMiniProgram
 
 ## v1.0.12 (2025-8-4)
 

@@ -123,9 +123,13 @@ export function getRandomString(
   // 添加特殊字符
   if (initOptions.includeSpecial)
     interleaveString(templateCharsArr, initOptions.chars3);
-
+  /** 结果字符串 */
   let result = '';
-  const templateCharsArrLength = templateCharsArr.length;
+  /** 混淆后的字符串 */
+  const str = templateCharsArr.join('');
+  /** 混淆后字符长度 */
+  const strLen = str.length;
+
   if (globalThis && globalThis.crypto && globalThis.crypto.getRandomValues) {
     // 使用密码学安全的随机数生成器
     const bytes = globalThis.crypto.getRandomValues(
@@ -134,12 +138,10 @@ export function getRandomString(
     /**  获取最后的 chars 数据  */
 
     // 循环遍历
-    bytes.forEach(
-      byte => (result += templateCharsArr[byte % templateCharsArrLength]),
-    );
+    bytes.forEach(byte => (result += str[byte % strLen]));
   } else {
     for (let i = 0; i < initOptions.length; i++)
-      result += templateCharsArr[getRandomInt(templateCharsArrLength - 1)];
+      result += str[getRandomInt(strLen - 1)];
   }
 
   /**
@@ -166,5 +168,12 @@ export function getRandomString(
       else if (i < str2Length) str1[i] = str2[i];
     }
   }
+
+  /// 结果字符串不包含字符
+  if (!/[a-zA-Z]/.test(result))
+    return String.fromCharCode(getRandomInt(97, 122)).concat(result.slice(1));
+
+  while (!/^[a-zA-Z]$/.test(result[0])) result = result.slice(1) + result[0];
+
   return result;
 }
