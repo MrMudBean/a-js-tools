@@ -32,14 +32,15 @@ import { isArray, isEmptyArray } from 'a-type-of-js';
  *
  */
 export function difference<T>(a: T[], b: T[]): T[] {
-  if ([a, b].some(e => !isArray(e))) throw new TypeError('参数需为数组');
-
-  if ([a, b].some(e => isEmptyArray(e))) return a;
-
+  if (!isArray(a) || !isArray(b)) {
+    throw new TypeError('参数需为数组');
+  }
+  if (isEmptyArray(a) || isEmptyArray(b)) {
+    return a;
+  }
   /**  获取两个数组中长度较小的  */
   // 参数有顺序要求
   // const [shorter, longer] = a.length > b.length ? [b, a] : [a, b];
-
   // const shorterSet = new Set(shorter);
   const bSet = new Set(b);
 

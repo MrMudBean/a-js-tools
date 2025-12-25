@@ -17,17 +17,13 @@ export function parse(
   }
 
   // 处理 flags
-  if (!isString(options.flags)) {
-    options.flags = '';
-  } else {
+  if (!isString(options.flags)) options.flags = '';
+  else {
     // 需求是保留字符串中的某一部分，使用
     const regexp = /[migsuy]/g;
     const matchResult = options.flags.match(regexp);
-    if (isNull(matchResult)) {
-      options.flags = '';
-    } else {
-      options.flags = [...new Set(matchResult)].join('');
-    }
+    if (isNull(matchResult)) options.flags = '';
+    else options.flags = [...new Set(matchResult)].join('');
   }
 
   return options;

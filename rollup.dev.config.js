@@ -16,6 +16,17 @@ export default {
     dir: '.eg/',
   },
   // 配置需要排除的包
-  external: external(),
+  external: external({
+    ignore: ['node:'],
+    include: [
+      'eg/index.ts',
+      '@qqi/dev',
+      'a-js-tools',
+      'color-pen',
+      '@qqi/log',
+      '@color-pen/static',
+      'a-node-tools',
+    ],
+  }),
   plugins: [resolve(), commonjs(), json(), typescript({}), cleanup()],
 };

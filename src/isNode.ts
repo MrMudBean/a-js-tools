@@ -6,7 +6,13 @@ import { isUndefined } from 'a-type-of-js';
  *
  */
 export function isNode(): boolean {
-  return !isUndefined(globalThis?.process?.versions?.node);
+  return !isUndefined(
+    (globalThis &&
+      globalThis.process &&
+      globalThis.process.versions &&
+      globalThis.process.versions.node) ||
+      undefined,
+  );
 }
 
 /**
