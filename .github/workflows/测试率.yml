@@ -2,7 +2,7 @@ name: 测试率自动化工具
 
 on:
   push:
-    branches: '*'
+    branches: 'no-test'
   workflow_dispatch:
     inputs:
       version:

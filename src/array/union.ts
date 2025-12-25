@@ -45,11 +45,9 @@ export function union<T>(...arrays: T[][]): T[] {
   if (isEmptyArray(arrays)) {
     return [];
   }
-
   if (arrays.some(i => !isArray(i))) {
     throw new TypeError('参数必须都是数组形式的元素');
   }
-
   if (arrays.length === 1) {
     return [...arrays[0]];
   }

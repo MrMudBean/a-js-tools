@@ -37,19 +37,11 @@ export function autoEscapedRegExp(
   pattern: string,
   options?: string | autoEscapedRegExpOptions,
 ): RegExp {
-  if (!isString(pattern)) {
-    throw new TypeError('pattern must be a 字符串');
-  }
-
+  if (!isString(pattern)) throw new TypeError('pattern must be a 字符串');
   pattern = escapeRegExp(pattern);
-
   /** 简单转化  */
-  if (isUndefined(options)) {
-    return new RegExp(pattern);
-  }
-
+  if (isUndefined(options)) return new RegExp(pattern);
   options = parse(options);
-
   return new RegExp(
     `${options.start ? '^' : ''}${pattern}${options.end ? '$' : ''}`,
     options.flags,

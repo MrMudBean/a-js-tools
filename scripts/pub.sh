@@ -3,7 +3,7 @@
 CHECK_VERSION="@qqi/check-version"
 # 安装  
 install_check_version() {
-    if ! npm  list -g --depth=0 | grep -q " ${CHECK_VERSION}"; then 
+    if ! npm  list -g --depth=0 | grep -q "${CHECK_VERSION}"; then 
         echo "当前未全局安装 '${CHECK_VERSION}'，即将进行安装"
         npm install ${CHECK_VERSION} --global
     else 
@@ -12,6 +12,7 @@ install_check_version() {
 }
 
 tag=""
+# npx 在某种程度上还是要比 pnpm 更靠谱呀
 install_check_version
 if ! tag=$(npx "${CHECK_VERSION}" c=. 2>&1); then
     echo "未通过版本校验：$tag"
@@ -19,9 +20,10 @@ if ! tag=$(npx "${CHECK_VERSION}" c=. 2>&1); then
 fi
 echo "获取🉐发布标签为 ${tag}"
 # 依赖安装
-npm ci
+# npm ci
+pnpm install --frozen-lockfile --prod=false
 # 构建项目
-if ! npm run build; then 
+if ! pnpm run build; then 
   echo "构建失败" 
   exit 0
 fi
@@ -35,9 +37,15 @@ fi
 # 确保脚本在遇见错误时立即退出
 set -e
 
+npm config list  # 检查当前配置
+
+echo "Registry: $(npm config get registry)"
+
+echo "Auth token: $(npm config get //registry.npmjs.org/:_authToken || echo 'NOT SET')"
+
 cd "dist"
 echo "开始发布 npm 包 ${tag} 版本"
-if ! npm publish --provenance --access public --tag "${tag}"; then
+if ! pnpm publish --provenance --access public --tag "${tag}" --no-git-checks; then
     echo "发布失败" 
     exit 1
 fi

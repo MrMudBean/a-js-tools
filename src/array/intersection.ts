@@ -22,11 +22,13 @@ import { isArray, isEmptyArray } from 'a-type-of-js';
  *
  */
 export function intersection<T>(a: T[], b: T[]): T[] {
-  if (!isArray(a) || !isArray(b)) throw new TypeError('参数必须是数组类型数据');
-
+  if (!isArray(a) || !isArray(b)) {
+    throw new TypeError('参数必须是数组类型数据');
+  }
   // 任意数组为空，则返回空数组
-  if ([a, b].some(e => isEmptyArray(e))) return [];
-
+  if (isEmptyArray(a) || isEmptyArray(b)) {
+    return [];
+  }
   /**
    * 在实际运算中， new Set() 的 开销为 O(n) ,filter 的开销也为 O(n)
    *
@@ -35,6 +37,5 @@ export function intersection<T>(a: T[], b: T[]): T[] {
   const [shorter, longer] = a.length <= b.length ? [a, b] : [b, a];
   // 提前创建工具 Set
   const shortSet = new Set(shorter);
-
   return longer.filter(item => shortSet.has(item));
 }

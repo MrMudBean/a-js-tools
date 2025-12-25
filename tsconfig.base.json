@@ -1,13 +1,28 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    // "baseUrl": ".",
+    "rootDir": ".",
     "jsx": "preserve",
     "strict": true,
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "esnext",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node",
+    // 控制模块导入解析策略的核心编译选项，决定了 TypeScript 如何查找和解析模块路径
+    // 包括从哪里查找引入模块、如果解析相对路径/第三方包路径、如果处理 package.json 的导出映射
+    // - **node** ：最常用，模拟 CommonJS 解析逻辑
+    //    - 自动查找 node_modules 目录
+    //    - 支持 index.js 目录索引文件
+    //    - 兼容传统 JS 生态
+    // - **node16/nodenext** ： 专为 Node.js 的 ECMAScript 模块设计
+    //    - 要求显式文件扩展名（如 .js 不能省略）
+    //    - 严格遵循 package.json 的 exports 字段
+    //    - 禁用 main 字段（优先使用 exports ）
+    // - **bundler** ： 现代前端推荐，模拟 Webpack/Rollup 等打包工具行为
+    //    - 允许省略文件扩展名（ 如 `import './utils';` 能匹配 utils.ts ）
+    //    - 支持别名设置 （ alias ） 配置
+    // - **classic** ： 遗留模式！早期解析方略，已不推荐使用，除非维护旧项目！
+    "moduleResolution": "bundler",
     "isolatedModules": true,
     "lib": ["ESNext", "DOM"],
     "sourceMap": false,

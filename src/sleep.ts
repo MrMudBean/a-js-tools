@@ -1,4 +1,4 @@
-import { isZero } from 'a-type-of-js';
+import { isZero } from 'a-type-of-js/isNumber';
 
 /**
  *

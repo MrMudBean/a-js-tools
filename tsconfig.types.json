@@ -4,7 +4,7 @@
   "compilerOptions": {
     "emitDeclarationOnly": true,
     "declaration": true,
-    "declarationDir": "dist/"
+    "declarationDir": "dist/es"
   },
   "exclude": ["node_modules", "test", "dist", "**/*.test.ts", "eg"]
 }

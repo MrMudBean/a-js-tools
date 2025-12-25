@@ -47,5 +47,25 @@ export interface CreateConstructor<T, Args extends unknown[] = unknown[]> {
 export function createConstructor<T, Args extends unknown[] = unknown[]>(
   constructor: (...argumentList: Args) => T,
 ): CreateConstructor<T, Args> {
+  constructor.prototype.apply = Function.apply;
+  constructor.prototype.bind = Function.bind;
+  constructor.prototype.call = Function.call;
+  constructor.prototype.length = Function.length;
+  // constructor.prototype.arguments = Function.arguments;
+  constructor.prototype.name = Function.name;
+  constructor.prototype.toString = Function.toString;
+
   return constructor as unknown as CreateConstructor<T, Args>;
+}
+
+/** 对象的 assign 用法 */
+export function ObjectAssign(
+  target: Record<string, unknown>,
+  bar: Record<string, unknown>,
+) {
+  const keys = Object.keys(bar);
+
+  keys.forEach(key => (target[key] = bar[key]));
+
+  return target;
 }

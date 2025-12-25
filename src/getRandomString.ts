@@ -6,8 +6,8 @@
  * @license MIT
  */
 import { isNaN, isNumber, isPlainObject, isUndefined } from 'a-type-of-js';
-import { isBrowser } from './isNode';
-
+import { ObjectAssign } from './object/createConstructor';
+import { getRandomInt } from './getRandomNumber';
 /**
  *
  *  随机字符串 生成器
@@ -84,9 +84,8 @@ export function getRandomString(
       (!isNumber(options.length) ||
         options.length < 1 ||
         !Number.isInteger(options.length)))
-  ) {
+  )
     throw new TypeError('参数类型错误 ❌ (getRandomString)');
-  }
 
   const initOptions: RandomStringOptions & {
     length: number;
@@ -105,45 +104,45 @@ export function getRandomString(
   };
 
   /// 生成 UUID
-  if (initOptions.type === 'uuid') {
-    return crypto.randomUUID();
-  }
-
-  if (isNumber(options) && Number.isInteger(options) && options > 0) {
-    // 验证输入参数
-    Object.assign(initOptions, { length: options });
-  }
-
+  if (initOptions.type === 'uuid') return crypto.randomUUID();
+  // 验证输入参数
+  if (isNumber(options) && Number.isInteger(options) && options > 0)
+    ObjectAssign(initOptions, { length: options });
   if (isPlainObject(options)) {
-    Object.assign(initOptions, options);
+    ObjectAssign(initOptions, options);
     initOptions.length = initOptions.length < 1 ? 32 : initOptions.length;
   }
   /**  生成随机字符串  */
   const templateCharsArr: string[] = initOptions.chars.split('');
   // 添加大写字母
-  if (initOptions.includeUppercaseLetters) {
+  if (initOptions.includeUppercaseLetters)
     interleaveString(templateCharsArr, initOptions.chars.toUpperCase());
-  }
   // 添加数字
-  if (initOptions.includeNumbers) {
+  if (initOptions.includeNumbers)
     interleaveString(templateCharsArr, initOptions.chars2);
-  }
   // 添加特殊字符
-  if (initOptions.includeSpecial) {
+  if (initOptions.includeSpecial)
     interleaveString(templateCharsArr, initOptions.chars3);
-  }
-
-  // 使用密码学安全的随机数生成器
-  const bytes =
-    isBrowser() && window.crypto
-      ? window.crypto.getRandomValues(new Uint8Array(initOptions.length))
-      : global.crypto.getRandomValues(new Uint8Array(initOptions.length));
+  /** 结果字符串 */
   let result = '';
-  /**  获取最后的 chars 数据  */
-  const chars = templateCharsArr.join('');
+  /** 混淆后的字符串 */
+  const str = templateCharsArr.join('');
+  /** 混淆后字符长度 */
+  const strLen = str.length;
 
-  // 循环遍历
-  bytes.forEach(byte => (result += chars.charAt(byte % chars.length)));
+  if (globalThis && globalThis.crypto && globalThis.crypto.getRandomValues) {
+    // 使用密码学安全的随机数生成器
+    const bytes = globalThis.crypto.getRandomValues(
+      new Uint8Array(initOptions.length),
+    );
+    /**  获取最后的 chars 数据  */
+
+    // 循环遍历
+    bytes.forEach(byte => (result += str[byte % strLen]));
+  } else {
+    for (let i = 0; i < initOptions.length; i++)
+      result += str[getRandomInt(strLen - 1)];
+  }
 
   /**
    *
@@ -172,5 +171,12 @@ export function getRandomString(
       }
     }
   }
+
+  /// 结果字符串不包含字符
+  if (!/[a-zA-Z]/.test(result))
+    return String.fromCharCode(getRandomInt(97, 122)).concat(result.slice(1));
+
+  while (!/^[a-zA-Z]$/.test(result[0])) result = result.slice(1) + result[0];
+
   return result;
 }

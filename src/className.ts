@@ -41,9 +41,9 @@ export function toLowerCamelCase(
       (match: string, p1: string) => p1.toUpperCase(),
     );
   // 多分隔符转化
-  dividingType.split('').forEach((item: string) => {
-    result = toTransform(result, item);
-  });
+  dividingType
+    .split('')
+    .forEach((item: string) => (result = toTransform(result, item)));
 
   return initial
     ? result.replace(/^./, (match: string) => match.toUpperCase())
