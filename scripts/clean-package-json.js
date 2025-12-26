@@ -34,7 +34,7 @@ for (const childrenName of srcChildrenList) {
     // 剔除测试文件
     childrenName.endsWith('.test.ts') ||
     // 剔除主文件
-    childrenName.endsWith('.test.ts') ||
+    childrenName.endsWith('index.ts') ||
     // 剔除非导出模块
     ['testData.ts', 'types.ts'].includes(childrenName)
   )
@@ -72,7 +72,7 @@ packageJson = {
   module: esPrefix + '/index.js', // 旧版本 ESM 入口
   // unpkg: '', // 如果希望通过 CDN 使用，可以添加 unpkg 字段指向 UMD 构建版本
   // funding: '', // 如果有人赞助，可以添加
-  types: dtsPrefix + '/index.d.ts', // 旧版本类型入口
+  types: dtsPrefix + '/src/index.d.ts', // 旧版本类型入口
   author: {
     name: '泥豆君',
     email: 'Mr.MudBean@outlook.com',
@@ -90,7 +90,7 @@ packageJson = {
       import: `./${esPrefix}/index.js`,
       default: `./${esPrefix}/index.js`,
       require: `./${cjsPrefix}/index.js`,
-      types: `./${dtsPrefix}/index.d.ts`,
+      types: `./${dtsPrefix}/src/index.d.ts`,
     },
     ...exportsList,
   },
