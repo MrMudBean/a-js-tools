@@ -1,17 +1,11 @@
 /**
  * 获取随机字符串
- *
- * @packageDocumentation
- * @module @a-js-tools/get-random-string
- * @license MIT
  */
 import { isNaN, isNumber, isPlainObject, isUndefined } from 'a-type-of-js';
 import { ObjectAssign } from './object/createConstructor';
 import { getRandomInt } from './getRandomNumber';
 /**
- *
- *  随机字符串 生成器
- *
+ *  随机字符串生成器
  */
 export type RandomStringOptions = {
   /**
@@ -54,13 +48,18 @@ export type RandomStringOptions = {
 };
 
 /**
+ * 获取简单的随机字符串
  *
- *  获取简单的随机字符串
+ * @param  options - 字符串生成参数
+ * @returns  - 随机字符串
+ * @example
+ * ```ts
+ * import { getRandomString } from 'a-js-tools';
  *
- *  @param   options - 字符串长度
- *  @returns  - 随机字符串
- *
- *
+ * // 获取简单的随机字符串
+ * // 'abcdefg'
+ * // getRandomString(7);
+ * ```
  */
 export function getRandomString(
   options?: RandomStringOptions | number,
@@ -145,18 +144,17 @@ export function getRandomString(
   }
 
   /**
+   * ## 字符串交叉函数
    *
-   *  字符串交叉函数
+   * 非线形串交叉，对相交叉
    *
-   *  非线形串交叉，对相交叉
-   *
-   *  @param  str1 - 字符串1
-   *  @param  str2 - 字符串2
-   *  @returns - 交叉后的字符串
-   *  @example
-   *  ```ts
-   *  interleaveString('abc', '123') // 'a1b2c3'
-   *  ```
+   * @param  str1 - 字符串1
+   * @param  str2 - 字符串2
+   * @returns - 交叉后的字符串
+   * @example
+   * ```ts
+   * interleaveString('abc', '123') // 'a1b2c3'
+   * ```
    */
   function interleaveString(str1: string[], str2: string) {
     const str1Length = str1.length,

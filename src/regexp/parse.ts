@@ -2,9 +2,7 @@ import { isNull, isString } from 'a-type-of-js';
 import { autoEscapedRegExpOptions } from './types';
 
 /**
- *
  * 解析 options
- *
  */
 export function parse(
   options: string | autoEscapedRegExpOptions,

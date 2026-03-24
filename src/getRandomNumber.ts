@@ -1,15 +1,10 @@
 /**
- * 过去随机数
- *
- * @packageDocumentation
- * @module @a-js-tools/get-random-number
- * @license MIT
+ * 获取随机数
  */
 import { isNaN, isNumber } from 'a-type-of-js';
 
 /**
- *
- * 获取一个随机的整数类型
+ * ## 获取一个随机的整数类型
  *
  * 您可以传入两个参数并获取它们之间的任意数字，返回值<span style="color:#ff0;">*会包含端值*</span>
  *
@@ -45,8 +40,7 @@ export function getRandomInt(max: number = 1, min: number = 0): number {
 }
 
 /**
- *
- * 获取任意的浮点数
+ * ## 获取任意的浮点数
  *
  * 您可以传入两个参数并获取它们之间的任意数字
  *

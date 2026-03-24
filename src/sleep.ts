@@ -1,7 +1,6 @@
-import { isZero } from 'a-type-of-js/isNumber';
+import { isZero } from 'a-type-of-js';
 
 /**
- *
  * ## 线程休息
  *
  * 但从调用到执行完毕总是与期望的时间并不相吻合，除非执行是线型的（也不保证时间的严格性）
@@ -21,12 +20,10 @@ import { isZero } from 'a-type-of-js/isNumber';
  * console.log(Date.now()); // 1748058118471
  * await sleep(1000);
  * console.log(Date.now()); // 1748058119473
- *
  * ```
- *
  */
 export async function sleep(delay: number = 1000): Promise<void> {
-  if (!isFinite(delay) || delay < 0)
+  if (!isFinite(delay) || delay < 4)
     throw new TypeError('delay 应该是一个正常的数值');
   if (isZero(delay)) return Promise.resolve();
 

@@ -4,8 +4,7 @@ import { autoEscapedRegExpOptions } from './types';
 import { parse } from './parse';
 
 /**
- *
- * ##  适用于简单的文本字符串自动转化为简单模式正则表达式
+ * ## 适用于简单的文本字符串自动转化为简单模式正则表达式
  *
  * *若字符串包含且需保留字符类、组、反向引用、量词等时，该方法可能不适用*
  *
@@ -13,7 +12,6 @@ import { parse } from './parse';
  * @param options 转化选项。 为文本字符串时，默认为正则表达式的标志，还可指定是否匹配开头或结尾
  * @returns 正则表达式
  * @example
- *
  * ```ts
  * import { autoEscapedRegExp } from 'a-regexp';
  *
@@ -29,9 +27,7 @@ import { parse } from './parse';
  * autoEscapedRegExp('a-zA-Z0-9', 'g'); // => /a-zA-Z0-9/g
  * autoEscapedRegExp('[a-zA-Z0-9]'); // => /\[a-zA-Z0-9\]/
  * autoEscapedRegExp('^[a-zA-Z0-9]+$'); // => /\^\[a-zA-Z0-9\]\$/
- *
  * ```
- *
  */
 export function autoEscapedRegExp(
   pattern: string,

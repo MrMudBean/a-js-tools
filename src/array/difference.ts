@@ -1,7 +1,7 @@
 import { isArray, isEmptyArray } from 'a-type-of-js';
 
 /**
- *  求给出的两个数组的差值（A - B）
+ *  ## 求给出的两个数组的差值（A - B）
  *
  * @param a  - 第一个数组
  * @param b - 第二个数组
@@ -9,12 +9,10 @@ import { isArray, isEmptyArray } from 'a-type-of-js';
  * @description 当两个参数有一个不是数组时将抛出
  * @returns 返回第一个参数相对第二个参数的差值
  * @example
- *
  * ```ts
  * import { difference} from 'a-js-tools';
  *
  * const log = console.log;
- *
  *
  * log(difference([], [1, 2, 3])); // []
  *
@@ -29,7 +27,6 @@ import { isArray, isEmptyArray } from 'a-type-of-js';
  * log(difference([1, 2, 3], null));
  * log(difference([1, 2, 3],  true));
  * ```
- *
  */
 export function difference<T>(a: T[], b: T[]): T[] {
   if (!isArray(a) || !isArray(b)) {

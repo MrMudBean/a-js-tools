@@ -1,15 +1,11 @@
 /**
- *
  * 构建构建的构建函数
- *
- *
  */
 export interface CreateConstructor<T, Args extends unknown[] = unknown[]> {
   new (...args: Args): T;
 }
 /**
- *
- * 构建一个 Constructor 构造函数
+ * # 构建一个 Constructor 构造函数
  *
  * 接收一个构造函数，然后返回 TS 能识别的构造函数自身
  *
@@ -19,7 +15,7 @@ export interface CreateConstructor<T, Args extends unknown[] = unknown[]> {
  *
  * @param constructor - 传入一个构造函数
  * @returns 返回传入的构造函数
- *
+ * @example
  * ```ts
  * import { createConstructor } from "a-js-tools";
  *
@@ -40,9 +36,7 @@ export interface CreateConstructor<T, Args extends unknown[] = unknown[]> {
  * const tomConstructor = createConstructor(_tom);
  *
  * const b = new tomConstructor(); // 这时就不会显示错误
- *
  * ```
- *
  */
 export function createConstructor<T, Args extends unknown[] = unknown[]>(
   constructor: (...argumentList: Args) => T,

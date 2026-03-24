@@ -1,25 +1,20 @@
 import { isArray, isEmptyArray } from 'a-type-of-js';
 
 /**
- *
- * 两个数组的交集
+ * ## 两个数组的交集
  *
  * @param a 数组 1️⃣
  * @param b 数组 2️⃣
  * @returns 返回两个数组的交集
  * @example
- *
  * ```ts
  * import { intersection } from 'a-js-tools';
  *
  * const log = console.log;
  *
- *
  * log(intersection([1, 2, 3, 4], [2, 3])); // [2, 3]
  * log(intersection([1, 3, 5, 7], [2, 3, 4])); // [3]
- *
  * ```
- *
  */
 export function intersection<T>(a: T[], b: T[]): T[] {
   if (!isArray(a) || !isArray(b)) {

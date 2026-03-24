@@ -1,22 +1,15 @@
 /**
  * 防抖和节流
- *
- * @packageDocumentation
- * @module @a-js-tools/performance
- * @license MIT
  */
-
 import { isUndefined, isNull } from 'a-type-of-js';
-import { isFunction } from 'a-type-of-js/isFunction';
-import { isNumber } from 'a-type-of-js/isNumber';
+import { isFunction } from 'a-type-of-js';
+import { isNumber } from 'a-type-of-js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Callback = (...args: any[]) => void;
 
 /**
- *
  * 节流和防抖返回值类型
- *
  */
 export interface DebounceAndThrottleReturnType<F extends Callback> {
   (...args: Parameters<F>): void;
@@ -32,7 +25,6 @@ export type debounce_throttle_options =
   | number;
 
 /**
- *
  * 防抖
  *
  * @param   callback 回调函数
@@ -43,11 +35,10 @@ export type debounce_throttle_options =
  * ```ts
  * const debounce = (callback: Function, delay = 300) => {
  *   let timer: any = null
- *   return (...args: any[]) => {
- *     clearTimeout(timer)
- *   }
- * }
  *
+ *   return (...args: any[]) => clearTimeout(timer)
+ * }
+ * ```
  */
 export function debounce<F extends Callback>(
   callback: F,
@@ -98,7 +89,7 @@ export function debounce<F extends Callback>(
 }
 
 /**
- *   节流
+ * 节流
  *
  * @param callback   回调函数
  * @param options      延迟时间（毫秒），默认 200 (ms) 或设置 this

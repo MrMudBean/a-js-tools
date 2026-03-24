@@ -2,7 +2,7 @@ import {
   getDirectoryBy,
   pathJoin,
   readFileToJsonSync,
-  writeJsonFile,
+  writeJsonFileSync,
   fileExist,
 } from 'a-node-tools';
 import { readdirSync } from 'node:fs';
@@ -16,7 +16,7 @@ let packageJson = readFileToJsonSync('./package.json');
 );
 const esPrefix = 'es'; // es 前缀
 const cjsPrefix = 'cjs'; // cjs 前缀
-const dtsPrefix = 'es'; // 类型文件的前缀
+const dtsPrefix = 'es/types'; // 类型文件的前缀
 // 查看当前打包 dist 文件路径
 const distParentPath = getDirectoryBy('dist', 'directory');
 // 查看当前的源码文件路径（原则上与上面值一致）
@@ -52,14 +52,14 @@ for (const childrenName of srcChildrenList) {
       default: `./${esPrefix}/${childrenName}/index.js`,
       import: `./${esPrefix}/${childrenName}/index.js`,
       require: `./${cjsPrefix}/${childrenName}/index.js`,
-      types: `./${dtsPrefix}/src/${childrenName}/index.d.ts`,
+      types: `./${dtsPrefix}/${childrenName}/index.d.ts`,
     };
   } else if (childFile.isFile()) {
     exportsList[`./${childrenBaseName}`] = {
       default: `./${esPrefix}/${childrenBaseName}.js`,
       import: `./${esPrefix}/${childrenBaseName}.js`,
       require: `./${cjsPrefix}/${childrenBaseName}.js`,
-      types: `./${dtsPrefix}/src/${childrenBaseName}.d.ts`,
+      types: `./${dtsPrefix}/${childrenBaseName}.d.ts`,
     };
   } else {
     throw new Range(`${childrenName} 文件类型不符合要求`);
@@ -72,11 +72,11 @@ packageJson = {
   module: esPrefix + '/index.js', // 旧版本 ESM 入口
   // unpkg: '', // 如果希望通过 CDN 使用，可以添加 unpkg 字段指向 UMD 构建版本
   // funding: '', // 如果有人赞助，可以添加
-  types: dtsPrefix + '/src/index.d.ts', // 旧版本类型入口
+  types: dtsPrefix + '/index.d.ts', // 旧版本类型入口
   author: {
     name: '泥豆君',
     email: 'Mr.MudBean@outlook.com',
-    url: 'https://earthnut.dev',
+    url: 'https://lmssee.com',
   },
   description: '一点点 🤏  js 函数',
   sideEffects: false, // 核心：开启 Tree Shaking
@@ -90,7 +90,7 @@ packageJson = {
       import: `./${esPrefix}/index.js`,
       default: `./${esPrefix}/index.js`,
       require: `./${cjsPrefix}/index.js`,
-      types: `./${dtsPrefix}/src/index.d.ts`,
+      types: `./${dtsPrefix}/index.d.ts`,
     },
     ...exportsList,
   },
@@ -98,8 +98,8 @@ packageJson = {
     type: 'git',
     url: 'git+https://github.com/MrMudBean/a-js-tools.git',
   },
-  keywords: ['a-js-tools', 'Mr.MudBean', 'earthnut', 'js tools'],
-  homepage: 'https://earthnut.dev/npm/a-js-tools',
+  keywords: ['a-js-tools', 'js 工具'],
+  homepage: 'https://lmssee.com/npm/a-js-tools',
   bugs: {
     url: 'https://github.com/MrMudBean/a-js-tools/issues',
     email: 'Mr.MudBean@outlook.com',
@@ -116,5 +116,5 @@ packageJson = {
   // 整理打包后 package.json 文件路径
   const distPackagePath = pathJoin(distParentPath, './dist/package.json');
   // 写入新的 packages.json 文件
-  writeJsonFile(distPackagePath, packageJson);
+  writeJsonFileSync(distPackagePath, packageJson);
 }

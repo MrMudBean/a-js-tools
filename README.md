@@ -34,7 +34,3 @@ npm install --save a-js-tools
 - `difference` 方法，计算两个数组的差集（以第一个数组为基准）
 - `symmetricDifference` 方法，计算两个数组的对称差集（在两个数组都不共有的元素）
 - `enArr` 对象，包含上面的方法
-
-## 查看文档
-
-查看 [https://earthnut.dev/npm/a-js-tools](https://earthnut.dev/npm/a-js-tools)

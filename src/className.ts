@@ -1,9 +1,5 @@
 /**
  * 驼峰命名与连字符命名法的互换
- *
- * @packageDocumentation
- * @module @a-js-tools/class-name
- * @license MIT
  */
 /**
  *
