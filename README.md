@@ -11,16 +11,17 @@ npm install --save a-js-tools
 
 ## 纯函数
 
-- `debounce` 防抖函数
-- `throttle` 节流函数
-- `getRandomInt` 获取随机的整数
-- `getRandomFloat` 获取随机的浮点数
-- `getRandomString` 获取随机字符串
-- `escapeRegExp` 转义字符串为简单的正则表达式
 - `autoEscapedRegExp` 生成简单的正则表达式
+- `createBezier` 构建简单的贝尔赛曲线
+- `debounce` 防抖函数
+- `escapeRegExp` 转义字符串为简单的正则表达式
+- `getRandomFloat` 获取随机的浮点数
+- `getRandomInt` 获取随机的整数
+- `getRandomString` 获取随机字符串
 - `isBrowser` 是否为浏览器环境
 - `isNode` 是否为 Node 环境
 - `sleep` 你的线程太累了，让它丫的睡一会吧
+- `throttle` 节流函数
 
 ## class 名称转化
 

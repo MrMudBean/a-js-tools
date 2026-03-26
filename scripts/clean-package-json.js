@@ -27,39 +27,50 @@ const srcDirectory = pathJoin(srcParentDirectory, 'src');
 const srcChildrenList = readdirSync(srcDirectory);
 // 打包的 exports
 const exportsList = {};
+const files = ['LICENSE', 'README.md'];
 
 for (const childrenName of srcChildrenList) {
   // 如果是测试文件则跳过
   if (
     // 剔除测试文件
     childrenName.endsWith('.test.ts') ||
-    // 剔除主文件
-    childrenName.endsWith('index.ts') ||
     // 剔除非导出模块
     ['testData.ts', 'types.ts'].includes(childrenName)
   )
     continue;
+
   // 文件名（不带后缀）
   const childrenBaseName = basename(childrenName, extname(childrenName));
   // 子文件/夹的路径
   const childPath = pathJoin(srcDirectory, childrenName);
 
   const childFile = fileExist(childPath); // 文件元数据
+  // 剔除主文件（主文件不添加到根导出但是需要添加到导出文件列表）
+  if (childrenName.endsWith('index.ts')) {
+    files.push('index.cjs.js', 'index.es.js', 'index.d.ts');
+    continue;
+  }
   if (!childFile) throw new RangeError(`${childrenName} 文件未能读取`);
   // 子文件是文件夹时以 index.xxx.js 为准
   if (childFile.isDirectory()) {
+    files.push(childrenName);
     exportsList[`./${childrenBaseName}`] = {
-      default: `./${esPrefix}/${childrenName}/index.js`,
-      import: `./${esPrefix}/${childrenName}/index.js`,
-      require: `./${cjsPrefix}/${childrenName}/index.js`,
-      types: `./${dtsPrefix}/${childrenName}/index.d.ts`,
+      default: `./${childrenName}/index.es.js`,
+      import: `./${childrenName}/index.es.js`,
+      require: `./${childrenName}/index.cjs.js`,
+      types: `./${childrenName}/index.d.ts`,
     };
   } else if (childFile.isFile()) {
+    files.push(
+      `${childrenBaseName}.cjs.js`,
+      `${childrenBaseName}.d.ts`,
+      `${childrenBaseName}.es.js`,
+    );
     exportsList[`./${childrenBaseName}`] = {
-      default: `./${esPrefix}/${childrenBaseName}.js`,
-      import: `./${esPrefix}/${childrenBaseName}.js`,
-      require: `./${cjsPrefix}/${childrenBaseName}.js`,
-      types: `./${dtsPrefix}/${childrenBaseName}.d.ts`,
+      default: `./${childrenBaseName}.es.js`,
+      import: `./${childrenBaseName}.es.js`,
+      require: `./${childrenBaseName}.cjs.js`,
+      types: `./${childrenBaseName}.d.ts`,
     };
   } else {
     throw new Range(`${childrenName} 文件类型不符合要求`);
@@ -84,13 +95,13 @@ packageJson = {
     // globalThis 支持的最低版本的 node 为 12
     node: '>=18.0.0',
   },
-  files: [esPrefix, cjsPrefix, 'LICENSE', 'README.md'],
+  files,
   exports: {
     '.': {
-      import: `./${esPrefix}/index.js`,
-      default: `./${esPrefix}/index.js`,
-      require: `./${cjsPrefix}/index.js`,
-      types: `./${dtsPrefix}/index.d.ts`,
+      import: `./index.es.js`,
+      default: `./index.es.js`,
+      require: `./index.es.js`,
+      types: `./index.d.ts`,
     },
     ...exportsList,
   },
